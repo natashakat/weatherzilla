@@ -1,2 +1,2 @@
 # weatherzilla
-This is a weather app, for demonstration
+This is a weather app, for demonstration purposes only
