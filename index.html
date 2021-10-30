@@ -21,11 +21,11 @@
 
           <div class="row">
             <div class="col">
-              <h1>
+              <h1> <!--current temp and city-->
                 <span class="city">Topeka, KS</span></br><span id="current-temp">74</span>° <span id="f">F</span> | <span id="c">C</span>
               </h1>
             </div>
-
+            <!--Search form-->
             <div class="col">
               <form id="city-search">
                 <div>
@@ -38,18 +38,19 @@
                     />
                   </div>
                   <div class="form-group col-1">
-                    <button class="btn btn-primary">Go</button>
+                    <button class="btn btn-primary go">Go!</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
 
+          <!--Current weather data row4-->
           <div class="row">
-            <div class="col-4">
-              <img src="img/clear.svg" alt="Sun with no clouds" />
+            <div class="col-6">
+              <img src="img/mostlysunny.svg" alt="Sun with no clouds" />
             </div>
-            <div class="col-8 datalist">
+            <div class="col-6 datalist">
               <ul class="align-text-middle ">
                 <li id="tdisplay"></li>
                 <li>High <span id="high-temp">83</span>°</li>
@@ -59,6 +60,15 @@
               </ul>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-3 future">
+              <img src="img/rainy.svg" alt="">
+              <span id="future-day-1">Monday</span><br>
+              <span id="future-max-1">60</span> | <span class="low" id="future-min-1">44</span>
+            </div>
+          </div>
+
         </div>
       </div>
       <a class="footer" href="https://github.com/natashakat/weatherzilla" target="_blank" rel="noopener noreferrer">Source Code</a>

@@ -1,3 +1,7 @@
+//This JS sets current time, handles form input, API call, and weather data output.
+//In the future I would like to select a random city with a population >100k and get/display its weather data
+
+//set default temp
 var fahrenheit = new Boolean(true);
 
 //Sets style of unit selector

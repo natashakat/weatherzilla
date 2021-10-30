@@ -8,6 +8,19 @@ li {
   list-style-type: none;
 }
 
+.btn-primary {
+  background-color: #6778e9;
+}
+
+.future {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.low {
+  opacity: 0.65;
+}
+
 .datalist {
   margin: auto;
 }
