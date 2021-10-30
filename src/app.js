@@ -1,5 +1,18 @@
 var fahrenheit = new Boolean(true);
 
+//Sets style of unit selector
+function styleUnitSelector() {
+  if (fahrenheit == false) {
+    document.getElementById("f").style.opacity = "0.65";
+    document.getElementById("c").style.opacity = "1.0";
+  } else {
+    document.getElementById("c").style.opacity = "0.65";
+    document.getElementById("f").style.opacity = "1.0";
+  }
+}
+
+styleUnitSelector();
+
 //Set time. Runs on start and every time API is called.
 function setTime() {
   let t = new Date();
@@ -40,8 +53,7 @@ function handleApiData(response) {
   let rh = response.data.main.humidity;
   setTime();
   if (fahrenheit == false) {
-    document.getElementById("f").style.color = "grey";
-    document.getElementById("c").style.color = "black";
+    styleUnitSelector();
     document.querySelector("#current-temp").innerHTML =
       Math.round(cCurrentTemp);
     document.querySelector("#high-temp").innerHTML = Math.round(cMaxTemp);
@@ -49,8 +61,7 @@ function handleApiData(response) {
     document.querySelector("#feels-like").innerHTML = Math.round(cFeelTemp);
     document.querySelector("#rh").innerHTML = rh;
   } else {
-    document.getElementById("c").style.color = "grey";
-    document.getElementById("f").style.color = "black";
+    styleUnitSelector();
     document.querySelector("#current-temp").innerHTML = Math.round(
       cCurrentTemp * 1.8 + 32
     );
@@ -74,19 +85,16 @@ function callWeatherApi(event) {
   let cityInput = document.querySelector("#city-input");
   cityOutput.innerHTML = cityInput.value;
   //get temp from API
-  let apiKey = "1ddb38b9301d7a5fc63cca47598b4a4e";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${config.apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
 
 //This runs when user changes unit preference. It calls API again, as if they had entered a city into the form
 function reevaluateTemp() {
   let cityInput = document.querySelector("#city-input");
-  let apiKey = "1ddb38b9301d7a5fc63cca47598b4a4e";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${config.apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
-
 
 let citySelection = document.querySelector("#city-search");
 citySelection.addEventListener("submit", callWeatherApi);

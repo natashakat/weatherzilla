@@ -12,25 +12,7 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
-    <style>
-      /*ul {
-        display: block;
-        margin: 0 auto;
-      }*/
-      li {
-        list-style-type: none;
-      }
-
-      .c:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-
-      .f:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    </style>
+    <link rel="stylesheet" href="src/style.css">
   </head>
   <body>
     <div class="container">
@@ -67,8 +49,8 @@
             <div class="col-4">
               <img src="img/clear.svg" alt="Sun with no clouds" />
             </div>
-            <div class="col-8">
-              <ul class="align-text-middle " style="margin-top: 36px;">
+            <div class="col-8 datalist">
+              <ul class="align-text-middle ">
                 <li id="tdisplay"></li>
                 <li>High <span id="high-temp">83</span>°</li>
                 <li>Low <span id="low-temp">61</span>°</li>
@@ -79,8 +61,9 @@
           </div>
         </div>
       </div>
-      <a href="https://github.com/natashakat/weatherzilla" target="_blank" rel="noopener noreferrer">Source Code</a>
+      <a class="footer" href="https://github.com/natashakat/weatherzilla" target="_blank" rel="noopener noreferrer">Source Code</a>
     </div>
+  <script type="text/javascript" src="src/config.js"></script>
   <script type="text/javascript" src="src/app.js"></script>
   </body>
 </html>

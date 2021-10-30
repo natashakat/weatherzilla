@@ -1,0 +1,45 @@
+ul {
+  margin: auto;
+  display: block;
+  display: inline-block;
+}
+
+li {
+  list-style-type: none;
+}
+
+.datalist {
+  margin: auto;
+}
+
+.footer {
+  size: 0.5em;
+  margin: 8px;
+  text-decoration: none;
+  color: #000000;
+  opacity: 0.65;
+  display: block;
+  text-align: center;
+}
+
+.footer:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #000000;
+}
+
+.card {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+#c:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#f:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
