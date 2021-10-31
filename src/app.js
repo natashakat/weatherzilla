@@ -3,6 +3,7 @@
 
 //set default temp
 var fahrenheit = new Boolean(true);
+var city = "Berlin";
 
 //Sets style of unit selector
 function styleUnitSelector() {
@@ -50,6 +51,7 @@ setTime();
 
 //Take data from API and use to change innerHTML- also rounds data, checks if C or F chosen by user- F is default.
 function handleApiData(response) {
+  console.log(response);
   let cCurrentTemp = response.data.main.temp;
   let cFeelTemp = response.data.main.feels_like;
   let cMaxTemp = response.data.main.temp_max;
@@ -58,6 +60,9 @@ function handleApiData(response) {
   setTime();
   if (fahrenheit == false) {
     styleUnitSelector();
+    let icon = document.querySelector("#current-icon");
+    icon.setAttribute("src", `img/${response.data.weather[0].icon}.svg`);
+    icon.setAttribute("alt", response.data.weather[0].description);
     document.querySelector("#current-temp").innerHTML =
       Math.round(cCurrentTemp);
     document.querySelector("#high-temp").innerHTML = Math.round(cMaxTemp);
@@ -66,6 +71,9 @@ function handleApiData(response) {
     document.querySelector("#rh").innerHTML = rh;
   } else {
     styleUnitSelector();
+    let icon = document.querySelector("#current-icon");
+    icon.setAttribute("src", `img/${response.data.weather[0].icon}.svg`);
+    icon.setAttribute("alt", response.data.weather[0].description);
     document.querySelector("#current-temp").innerHTML = Math.round(
       cCurrentTemp * 1.8 + 32
     );
@@ -82,27 +90,38 @@ function handleApiData(response) {
   }
 }
 
-function callWeatherApi(event) {
-  event.preventDefault();
+//Runs after user inputs a city, and upon page load
+function callWeatherApi() {
   //set header, based on user input
-  let cityOutput = document.querySelector(".city");
-  let cityInput = document.querySelector("#city-input");
-  cityOutput.innerHTML = cityInput.value;
+  let cityHeader = document.querySelector(".city");
+  cityHeader.innerHTML = city;
   //get temp from API
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${config.apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
+
+callWeatherApi();
 
 //This runs when user changes unit preference. It calls API again, as if they had entered a city into the form
 function reevaluateTemp() {
-  let cityInput = document.querySelector("#city-input");
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${config.apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
 
-let citySelection = document.querySelector("#city-search");
-citySelection.addEventListener("submit", callWeatherApi);
+//store user input, call API function, and reset inputbox
+function setCityVar(event) {
+  event.preventDefault();
+  let userInput = document.querySelector("#city-input").value;
+  city = userInput;
+  document.getElementById("city-search").reset();
+  callWeatherApi();
+}
 
+//Event listener for user input
+let citySelection = document.querySelector("#city-search");
+citySelection.addEventListener("submit", setCityVar);
+
+//Sets unit
 let fButton = document.querySelector("#f");
 let cButton = document.querySelector("#c");
 

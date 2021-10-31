@@ -8,7 +8,13 @@ li {
   list-style-type: none;
 }
 
+img {
+  display: block;
+  margin: auto;
+}
+
 .btn-primary {
+  margin-top: 0.25rem;
   background-color: #6778e9;
 }
 
