@@ -6,11 +6,17 @@ ul {
 
 li {
   list-style-type: none;
+  font-size: 0.9em;
 }
 
 img {
   display: block;
   margin: auto;
+}
+
+h2 {
+  font-size: 1.3em;
+  opacity: 0.65;
 }
 
 .btn-primary {
@@ -48,7 +54,7 @@ img {
 }
 
 .card {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   margin-top: 15px;
 }

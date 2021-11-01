@@ -1,7 +1,6 @@
 //This JS sets current time, handles form input, API call, and weather data output.
-//In the future I would like to select a random city with a population >100k and get/display its weather data
 
-//set default temp
+//set default units
 var fahrenheit = new Boolean(true);
 var city = "Berlin";
 
@@ -51,13 +50,20 @@ setTime();
 
 //Take data from API and use to change innerHTML- also rounds data, checks if C or F chosen by user- F is default.
 function handleApiData(response) {
-  console.log(response);
+  //store temp data
   let cCurrentTemp = response.data.main.temp;
   let cFeelTemp = response.data.main.feels_like;
   let cMaxTemp = response.data.main.temp_max;
   let cMinTemp = response.data.main.temp_min;
   let rh = response.data.main.humidity;
+  let windSpeed = response.data.wind.speed;
+  //set city, description, time
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
+  let cityHeader = document.querySelector(".city");
+  cityHeader.innerHTML = city;
   setTime();
+  //output data based on unit selection
   if (fahrenheit == false) {
     styleUnitSelector();
     let icon = document.querySelector("#current-icon");
@@ -69,6 +75,9 @@ function handleApiData(response) {
     document.querySelector("#low-temp").innerHTML = Math.round(cMinTemp);
     document.querySelector("#feels-like").innerHTML = Math.round(cFeelTemp);
     document.querySelector("#rh").innerHTML = rh;
+    document.querySelector("#wind-speed").innerHTML = `${Math.round(
+      windSpeed * 3.6
+    )} km/h`;
   } else {
     styleUnitSelector();
     let icon = document.querySelector("#current-icon");
@@ -87,14 +96,14 @@ function handleApiData(response) {
       cFeelTemp * 1.8 + 32
     );
     document.querySelector("#rh").innerHTML = rh;
+    document.querySelector("#wind-speed").innerHTML = `${Math.round(
+      windSpeed * 2.237
+    )} mph`;
   }
 }
 
 //Runs after user inputs a city, and upon page load
 function callWeatherApi() {
-  //set header, based on user input
-  let cityHeader = document.querySelector(".city");
-  cityHeader.innerHTML = city;
   //get temp from API
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
