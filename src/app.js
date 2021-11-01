@@ -105,7 +105,8 @@ function handleApiData(response) {
 //Runs after user inputs a city, and upon page load
 function callWeatherApi() {
   //get temp from API
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.apiKey}&units=metric`;
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
 
@@ -113,7 +114,8 @@ callWeatherApi();
 
 //This runs when user changes unit preference. It calls API again, as if they had entered a city into the form
 function reevaluateTemp() {
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.apiKey}&units=metric`;
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
 
