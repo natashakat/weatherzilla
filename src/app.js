@@ -17,6 +17,14 @@ function styleUnitSelector() {
 
 styleUnitSelector();
 
+function convertTemp(temp) {
+  if (fahrenheit == false) {
+    return Math.round(temp);
+  } else {
+    return Math.round(temp * 1.8 + 32);
+  }
+}
+
 //Set time. Runs on start and every time API is called.
 function setTime() {
   let t = new Date();
@@ -48,8 +56,61 @@ function setTime() {
 
 setTime();
 
+//Inject forecast HTML
+function injectForecast(response) {
+  console.log(response);
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+
+  forecastHTML = `<div class="row">`;
+
+  let t = new Date();
+
+  function convertUnixTime(tStamp) {
+    let date = new Date(tStamp * 1000);
+    let dayIndex = date.getDay(date);
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    return days[dayIndex];
+  }
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 4) {
+      forecastHTML =
+        forecastHTML +
+        `
+        <div class="col future">
+          <img src="img/${forecastDay.weather[0].icon}.svg" alt="">
+          <span id="future-day-1">${convertUnixTime(forecastDay.dt)}</span><br>
+          <span id="future-max-1">${convertTemp(
+            forecastDay.temp.max
+          )}°</span> | <span class="low" id="future-min-1">${convertTemp(
+          forecastDay.temp.min
+        )}°</span>
+        </div>
+      `;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function handleForecastData(response) {
+  console.log(response);
+}
+
 //Take data from API and use to change innerHTML- also rounds data, checks if C or F chosen by user- F is default.
 function handleApiData(response) {
+  console.log(response);
   //store temp data
   let cCurrentTemp = response.data.main.temp;
   let cFeelTemp = response.data.main.feels_like;
@@ -100,13 +161,15 @@ function handleApiData(response) {
       windSpeed * 2.237
     )} mph`;
   }
+
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&exclude=current,minutely,hourly,alerts&appid=${config.apiKey}&units=metric`;
+  axios.get(apiUrl).then(injectForecast);
 }
 
 //Runs after user inputs a city, and upon page load
 function callWeatherApi() {
   //get temp from API
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
 
@@ -114,8 +177,7 @@ callWeatherApi();
 
 //This runs when user changes unit preference. It calls API again, as if they had entered a city into the form
 function reevaluateTemp() {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.apiKey}&units=metric`;
   axios.get(apiUrl).then(handleApiData);
 }
 
