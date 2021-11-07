@@ -12,17 +12,20 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
     <div class="container">
       <div class="card">
         <div class="card-body">
-
           <div class="row">
             <div class="col">
-              <h1> <!--current temp and city-->
-                <span class="city"></span></br><span id="current-temp">74</span>° <span id="f">F</span> | <span id="c">C</span>
+              <h1>
+                <!--current temp and city-->
+                <span id="city"></span>
+                <span id="current-temp"></span>
+                <span id="f">F</span> |
+                <span id="c">C</span>
               </h1>
               <h2 id="tdisplay"></h2>
               <h2 id="description"></h2>
@@ -40,49 +43,28 @@
                       id="city-input"
                     />
                   </div>
-                  <div class="form-group col-1">
-                    <button class="btn btn-primary go">Go!</button>
+                  <div class="form-group">
+                    <button class="btn btn-primary go">Weather Search</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
 
-          <!--Current weather data row4-->
-          <div class="row">
-            <div class="col-6">
-              <img id="current-icon" src="img/01d.svg" alt="placeholder image" />
-            </div>
-            <div class="col-6 datalist">
-              <ul class="align-text-middle ">
-                <li>High: <span id="high-temp">83</span>°</li>
-                <li>Low: <span id="low-temp">61</span>°</li>
-                <li>Feels like: <span id="feels-like">69</span>°</li>
-                <li>Humidity: <span id="rh">43</span>%</li>
-                <li>Wind: <span id="wind-speed"></span></li>
-              </ul>
-            </div>
-          </div>
+          <div id="current"><!--inject current weather HTML here--></div>
 
-        <div id="forecast"> <!--inject forecast HTML here-->
-
-        </div>
-
-        <!-- Forecast
-          <div class="row">
-            <div class="col-3 future">
-              <img src="img/rainy.svg" alt="">
-              <span id="future-day-1">Monday</span><br>
-              <span id="future-max-1">60°</span> | <span class="low" id="future-min-1">44°</span>
-            </div>
-          </div>
-        -->
-
+          <div id="forecast"><!--inject forecast HTML here--></div>
         </div>
       </div>
-      <a class="footer" href="https://github.com/natashakat/weatherzilla" target="_blank" rel="noopener noreferrer">Source Code</a>
+      <a
+        class="footer"
+        href="https://github.com/natashakat/weatherzilla"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Source Code</a
+      >
     </div>
-  <script type="text/javascript" src="src/config.js"></script>
-  <script type="text/javascript" src="src/app.js"></script>
+    <script type="text/javascript" src="src/config.js"></script>
+    <script type="text/javascript" src="src/app.js"></script>
   </body>
 </html>

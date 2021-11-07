@@ -39,6 +39,7 @@ h2 {
 }
 
 .footer {
+  font-family: "Courier New", Courier, monospace;
   size: 0.5em;
   margin: 8px;
   text-decoration: none;
